@@ -11,7 +11,7 @@ var connection = require('./sequelize.js');
       type: Sequelize.STRING
     },
     description: {
-      type: Sequelize.STRING
+      type: Sequelize.TEXT
     },
     price: {
       type: Sequelize.DECIMAL

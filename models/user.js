@@ -8,7 +8,10 @@ var connection = require('./sequelize.js');
       defaultValue: Sequelize.UUIDV4
     },
     email: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      validate: {
+        isEmail: true
+      }
     },
     password: {
       type: Sequelize.STRING
