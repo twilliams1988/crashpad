@@ -1,20 +1,7 @@
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('crashpad_development', null, null, {
-        dialect: "postgres",
-        port: 5432,
-        sync: { force: false }
-    });
+var connection = require('./sequelize.js');
 
-sequelize
-  .authenticate()
-  .then(function(err) {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(function (err) {
-    console.log('Unable to connect to the database:', err);
-  });
-
-  var User = sequelize.define('user', {
+  var User = connection.define('user', {
     id: {
       primaryKey: true,
       type: Sequelize.UUID,
@@ -27,5 +14,5 @@ sequelize
       type: Sequelize.STRING
     }
   });
-User.sync({force: false})
+User.sync({force: false});
 module.exports = User;
