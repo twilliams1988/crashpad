@@ -1,21 +1,18 @@
-var Sequelize = require('sequelize');
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var Sequelize     = require('sequelize');
+var express       = require('express');
+var path          = require('path');
+var favicon       = require('serve-favicon');
+var logger        = require('morgan');
+var cookieParser  = require('cookie-parser');
+var bodyParser    = require('body-parser');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var routes  = require('./routes/index');
+var users   = require('./routes/users');
+var spaces  = require('./routes/spaces');
 
 var app = express();
 
 // Sequelize database connection
-
-
-
-
 var sequelize = new Sequelize('postgres://localhost:5432/crashpad_development');
 
 sequelize
@@ -27,7 +24,8 @@ sequelize
     console.log('Unable to connect to the database:', err);
   });
 
-  var userModel = require('./models/user');
+  var userModel   = require('./models/user');
+  var spaceModel  = require('./models/space');
 
 
 // view engine setup
@@ -44,6 +42,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/spaces', spaces);
+app.use('/spaces/new', spaces);
 
 
 // catch 404 and forward to error handler
