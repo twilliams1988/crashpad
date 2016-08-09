@@ -5,7 +5,7 @@ Browser.localhost('example.com', 3000);
 describe('User visits signup page', function() {
 
   browser = new Browser();
-  var url = 'http://localhost:3000';
+  var url = 'http://127.0.0.1:3000';
 
   before(function(done) {
     browser.visit(url + '/users/new', done);
