@@ -1,7 +1,25 @@
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('postgres://localhost:5432/crashpad_development');
+var sequelize = new Sequelize('crashpad_development', null, null, {
+        dialect: "postgres",
+        port: 5432,
+        sync: { force: false }
+    });
+
+sequelize
+  .authenticate()
+  .then(function(err) {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(function (err) {
+    console.log('Unable to connect to the database:', err);
+  });
 
   var Space = sequelize.define('space', {
+    id: {
+      primaryKey: true,
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4
+    },
     name: {
       type: Sequelize.STRING
     },
@@ -13,12 +31,6 @@ var sequelize = new Sequelize('postgres://localhost:5432/crashpad_development');
     }
   });
 
-  // force: true will drop the table if it already exists
-  Space.sync({force: true}).then(function () {
-    // Table created
-    return Space.create({
-      name: 'Terry\'s House',
-      description: 'This is a description',
-      price: 200
-    });
-  });
+  Space.sync({force: false});
+
+  module.exports = Space;

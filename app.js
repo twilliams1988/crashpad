@@ -12,22 +12,6 @@ var spaces  = require('./routes/spaces');
 
 var app = express();
 
-// Sequelize database connection
-var sequelize = new Sequelize('postgres://localhost:5432/crashpad_development');
-
-sequelize
-  .authenticate()
-  .then(function(err) {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(function (err) {
-    console.log('Unable to connect to the database:', err);
-  });
-
-  var userModel   = require('./models/user');
-  var spaceModel  = require('./models/space');
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -44,7 +28,6 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/spaces', spaces);
 app.use('/spaces/new', spaces);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

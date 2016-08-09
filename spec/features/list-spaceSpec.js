@@ -27,7 +27,7 @@ describe('User visits list space page', function() {
     });
 
     it('will redirect to /spaces', function() {
-      brower.assert.url(url + '/spaces');
+      browser.assert.url(url + '/spaces');
     });
 
   });
