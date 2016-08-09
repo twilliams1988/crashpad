@@ -1,4 +1,3 @@
-var Sequelize = require('sequelize');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -10,21 +9,9 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+var Sequelize = require('sequelize');
 
 // Sequelize database connection
-var sequelize = new Sequelize('postgres://localhost:5432/crashpad_development');
-
-sequelize
-  .authenticate()
-  .then(function(err) {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(function (err) {
-    console.log('Unable to connect to the database:', err);
-  });
-
-  var userModel = require('./models/user');
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

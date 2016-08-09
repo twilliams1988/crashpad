@@ -22,6 +22,11 @@ describe('User visits signup page', function() {
 
     it('should be successful', function() {
       browser.assert.success();
+      browser.assert.status(200);
+    });
+
+    it('should redirect to home page', function() {
+      browser.assert.url({pathname: '/'});
     });
   });
 });
