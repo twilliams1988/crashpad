@@ -11,6 +11,7 @@ var users   = require('./routes/users');
 var spaces  = require('./routes/spaces');
 
 var app = express();
+var Sequelize = require('sequelize');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,7 +25,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//routes
 app.use('/', routes);
+app.use('/users/new', users);
 app.use('/users', users);
 app.use('/spaces', spaces);
 app.use('/spaces/new', spaces);

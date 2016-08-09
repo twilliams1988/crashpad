@@ -1,22 +1,18 @@
 var Sequelize = require('sequelize');
+var connection = require('./sequelize.js');
 
-var sequelize = new Sequelize('postgres://localhost:5432/crashpad_development');
-
-
-  var User = sequelize.define('user', {
-    firstName: {
+  var User = connection.define('user', {
+    id: {
+      primaryKey: true,
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4
+    },
+    email: {
       type: Sequelize.STRING
     },
-    lastName: {
+    password: {
       type: Sequelize.STRING
     }
   });
-
-  // force: true will drop the table if it already exists
-  User.sync({force: true}).then(function () {
-    // Table created
-    return User.create({
-      firstName: 'Tommy',
-      lastName: 'Williams'
-    });
-  });
+User.sync({force: false});
+module.exports = User;

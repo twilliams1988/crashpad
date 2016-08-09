@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha spec/features/* -w"
+    "test": "mocha spec/* -w"
   },
   "dependencies": {
+    "bcrypt": "^0.8.7",
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
