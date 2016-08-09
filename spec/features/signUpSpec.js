@@ -15,7 +15,7 @@ describe('User visits signup page', function() {
 
     before(function(done) {
       browser
-        .fill('email',    'user@exampl.com')
+        .fill('email',    'user@example.com')
         .fill('password', '12345')
         .pressButton('Sign Up', done);
     });
