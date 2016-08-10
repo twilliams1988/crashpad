@@ -4,7 +4,12 @@ var Pad = require('../models/pad');
 
 
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  var allPads = Pad.findAll().then(function(allPads) {
+    res.render('pads/index', {
+    title:      'Pad Listings',
+    padList:    allPads
+    });
+  });
 });
 
 router.get('/new', function(req, res, next) {
@@ -19,11 +24,18 @@ router.post('/', function(req, res, next) {
                   location:     req.body.location,
                   description:  req.body.description,
                   price:        req.body.price
-                });
-
+  }).then(function(user) {
   res.redirect('/pads');
-
+  });
 });
 
 
 module.exports = router;
+
+
+// User.create({ username: 'barfooz', isAdmin: true }, { fields: [ 'username' ] }).then(function(user) {
+//   // let's assume the default of isAdmin is false:
+//   console.log(user.get({
+//     plain: true
+//   })) // => { username: 'barfooz', isAdmin: false }
+// })

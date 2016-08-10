@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head><% include ../partials/page/head.ejs %></head>
+  <body>
+    <% include ../partials/page/header.ejs %>
+
+    <div class="container">
+
+    <div class="list-group">
+      <% for (var i=0; i < padList.length;i++) { %>
+      <a href="#" class="list-group-item">
+        <h4 class="list-group-item-heading"><%= padList[i].name; %></h4>
+        <p class="list-group-item-text text-muted"><%= padList[i].description; %></p>
+      </a>
+      <% }; %>
+    </div>
+
+    </div>
+
+    <% include ../partials/page/footer.ejs %>
+  </body>
+</html>
