@@ -11,6 +11,7 @@
           <a href="#" class="list-group-item">
             <h4 class="list-group-item-heading"><%= padList[i].name; %> <span class="label label-primary">£<%= padList[i].price; %></span></h4>
             <h5 class="list-group-item-heading"><i class="fa fa-map-marker" aria-hidden="true"></i> <%= padList[i].location; %></h5>
+            <h6 class="list-group-item-heading"><i class="fa fa-calendar" aria-hidden="true"></i> <b><%= padList[i].availableFrom.toDateString(); %></b> to <b><%= padList[i].availableTo.toDateString(); %></b> </h6>
             <p class="list-group-item-text text-muted"><%= padList[i].description.substring(0, 200); %></p>
           </a>
           <% }; %>

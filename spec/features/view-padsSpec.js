@@ -16,18 +16,22 @@ describe('User visits pads page', function() {
 
     before(function(done) {
       browser
-        .fill('name',         'Terry\'s House')
-        .fill('description',  'This is a description')
-        .fill('location',     'London')
-        .fill('price',        200)
+        .fill('name',           'Tims House')
+        .fill('description',    'This is a description')
+        .fill('location',       'Angel')
+        .fill('price',          200)
+        .fill('availableFrom',  "2016-08-16")
+        .fill('availableTo',    "2016-08-30")
         .pressButton('List my pad', done);
     });
 
     it('have listing', function() {
-      browser.assert.text('body', 'Terry\'s House');
+      browser.assert.text('body', 'Tims House');
       browser.assert.text('body', 'This is a');
-      browser.assert.text('body', 'London');
+      browser.assert.text('body', 'Angel');
       browser.assert.text('body', '200');
+      browser.assert.text('body', 'Aug 16 2016');
+      browser.assert.text('body', 'Aug 30 2016');
     });
 
   });

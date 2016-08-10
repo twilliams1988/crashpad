@@ -18,6 +18,12 @@ var connection = require('./sequelize.js');
     },
     price: {
       type: Sequelize.DECIMAL
+    },
+    availableFrom: {
+      type: Sequelize.DATE
+    },
+    availableTo: {
+      type: Sequelize.DATE
     }
   });
 

@@ -20,10 +20,12 @@ router.get('/new', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  var pad = Pad.create({name:   req.body.name,
-                  location:     req.body.location,
-                  description:  req.body.description,
-                  price:        req.body.price
+  var pad = Pad.create({name:     req.body.name,
+                  location:       req.body.location,
+                  description:    req.body.description,
+                  price:          req.body.price,
+                  availableFrom:  req.body.availableFrom,
+                  availableTo:    req.body.availableTo
   }).then(function(user) {
   res.redirect('/pads');
   });

@@ -16,10 +16,12 @@ describe('User visits list pad page', function() {
 
     before(function(done) {
       browser
-        .fill('name',         'Terry\'s House')
-        .fill('description',  'This is a description')
-        .fill('location',     'Angel')
-        .fill('price',        200)
+        .fill('name',           'Tims House')
+        .fill('description',    'This is a description')
+        .fill('location',       'Angel')
+        .fill('price',          200)
+        .fill('availableFrom',  "2016-08-16")
+        .fill('availableTo',    "2016-08-30")
         .pressButton('List my pad', done);
     });
 
