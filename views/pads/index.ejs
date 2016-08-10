@@ -9,7 +9,8 @@
         <div class="list-group">
           <% for (var i=0; i < padList.length;i++) { %>
           <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading"><%= padList[i].name; %></h4>
+            <h4 class="list-group-item-heading"><%= padList[i].name; %> <span class="label label-primary">£<%= padList[i].price; %></span></h4>
+            <h5 class="list-group-item-heading"><i class="fa fa-map-marker" aria-hidden="true"></i> <%= padList[i].location; %></h5>
             <p class="list-group-item-text text-muted"><%= padList[i].description.substring(0, 200); %></p>
           </a>
           <% }; %>
