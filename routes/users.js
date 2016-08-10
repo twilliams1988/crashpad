@@ -6,7 +6,10 @@ var salt = bcrypt.genSaltSync(10);
 
 /* GET users listing. */
 router.get('/', function(req, res) {
-  res.render('users/new');
+  res.render('users/new', {
+    title:      'Sign Up',
+    bodyClass:  'new-user'
+  });
 });
 
 
