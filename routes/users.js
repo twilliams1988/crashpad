@@ -16,30 +16,21 @@ router.get('/new', function(req, res) {
 
 
 router.post('/', function(req, res) {
-  var user = User.build({firstName: req.body.firstName,
-                  lastName: req.body.lastName,
-                  email: req.body.email,
-                  password: req.body.password,
-                  passwordConfirmation: req.body.passwordConfirmation
-                });
-  // if(user.password === user.passwordConfirmation) {
-  //     user.save();
-  //     res.redirect('/');
-  // } else {
-  //   res.render('/users/new');
-  // }
-  //
+  if(req.body.password === req.body.passwordConfirmation) {
+    User
+        .create({firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    email: req.body.email,
+                    passwordDigest: bcrypt.hashSync(req.body.password, salt)
+                  })
+        .catch(function(error) {
+          return res.send(error.message)
+        })
+    // res.redirect('/');
+  } else {
+   res.redirect('/users/new');
+  }
+
   });
-
-      // checkPassword();
-      // function checkPassword(){
-      //   if(password !== passwordConfirmation) {
-      //     res.redirect('/users/new');
-      //   } else {
-      //     var password_digest = bcrypt.hashSync(password, salt);
-      //
-
-      //   }
-      // }
 
 module.exports = router;

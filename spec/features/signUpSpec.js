@@ -15,6 +15,8 @@ describe('User visits signup page', function() {
 
     before(function(done) {
       browser
+        .fill('firstName', 'User')
+        .fill('lastName',  'lastUser')
         .fill('email',    'user@example.com')
         .fill('password', '12345')
         .fill('passwordConfirmation', '12345')
@@ -30,4 +32,17 @@ describe('User visits signup page', function() {
       browser.assert.url({pathname: '/'});
     });
   });
+
+  describe('submits form with incorrect/missing details', function() {
+    it('passwords do not match', function() {
+      browser
+        .fill('firstName', 'User')
+        .fill('lastName',  'lastUser')
+        .fill('email',    'user@example.com')
+        .fill('password', '12345')
+        .fill('passwordConfirmation', 'wrong')
+        .pressButton('Sign Up', done);
+      browser.assert.url({pathname: '/users/new'});
+    });
+
 });
