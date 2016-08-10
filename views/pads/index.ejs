@@ -5,18 +5,17 @@
     <% include ../partials/page/header.ejs %>
 
     <div class="container">
-
-    <div class="list-group">
-      <% for (var i=0; i < padList.length;i++) { %>
-      <a href="#" class="list-group-item">
-        <h4 class="list-group-item-heading"><%= padList[i].name; %></h4>
-        <p class="list-group-item-text text-muted"><%= padList[i].description; %></p>
-      </a>
-      <% }; %>
+      <div class="col-md-6 col-md-offset-3">
+        <div class="list-group">
+          <% for (var i=0; i < padList.length;i++) { %>
+          <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading"><%= padList[i].name; %></h4>
+            <p class="list-group-item-text text-muted"><%= padList[i].description.substring(0, 200); %></p>
+          </a>
+          <% }; %>
+        </div>
+      </div>
     </div>
-
-    </div>
-
     <% include ../partials/page/footer.ejs %>
   </body>
 </html>

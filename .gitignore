@@ -1,5 +1,7 @@
 
-# Created by https://www.gitignore.io/api/macos,node
+# Created by https://www.gitignore.io/api/mac,macos,node,bower,codekit
+
+#!! ERROR: mac is undefined. Use list command to see defined gitignore types !!#
 
 ### macOS ###
 *.DS_Store
@@ -69,3 +71,17 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+
+### Bower ###
+bower_components
+.bower-cache
+.bower-registry
+.bower-tmp
+
+
+### CodeKit ###
+# General CodeKit files to ignore
+config.codekit
+/min
+**/.sass-cache
