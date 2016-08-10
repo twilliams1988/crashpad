@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Space = require('../models/space');
+var Pad = require('../models/pad');
 
 
 router.get('/', function(req, res, next) {
@@ -8,25 +8,27 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/new', function(req, res, next) {
-  res.render('spaces/new', {
-    title:      'List New Space',
-    bodyClass:  'new-space'
+  res.render('pads/new', {
+    title:      'List New Pad',
+    bodyClass:  'new-pad'
   });
 });
 
 router.post('/', function(req, res, next) {
   var name        = req.body.name,
+      location    = req.body.location,
       description = req.body.description,
       price       = req.body.price;
 
-  Space.findOrCreate({
+  Pad.findOrCreate({
     where: {
       name:         name,
+      location:     location,
       description:  description,
       price:        price
     }});
 
-  res.redirect('/spaces');
+  res.redirect('/pads');
 
 });
 

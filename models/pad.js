@@ -1,13 +1,16 @@
 var Sequelize = require('sequelize');
 var connection = require('./sequelize.js');
 
-  var Space = connection.define('space', {
+  var Pad = connection.define('pad', {
     id: {
       primaryKey: true,
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4
     },
     name: {
+      type: Sequelize.STRING
+    },
+    location: {
       type: Sequelize.STRING
     },
     description: {
@@ -18,6 +21,6 @@ var connection = require('./sequelize.js');
     }
   });
 
-  Space.sync({force: false});
+  Pad.sync({force: false});
 
-  module.exports = Space;
+  module.exports = Pad;

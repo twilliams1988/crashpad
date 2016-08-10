@@ -12,7 +12,7 @@ var Sequelize     = require('sequelize'),
 
 var routes  = require('./routes/index'),
     users   = require('./routes/users'),
-    spaces  = require('./routes/spaces');
+    pads    = require('./routes/pads');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //routes
 app.use('/', routes);
 app.use('/users', users);
-app.use('/spaces', spaces);
+app.use('/pads', pads);
 
 //flash config
 // app.use(express.cookieParser('keyboard cat'));
