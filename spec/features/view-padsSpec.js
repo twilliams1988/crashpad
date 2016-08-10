@@ -3,7 +3,7 @@ var Browser = require('zombie');
 
 Browser.localhost('example.com', 3000);
 
-describe('User visits list pad page', function() {
+describe('User visits pads page', function() {
 
   browser = new Browser();
   var url = 'http://localhost:3000';
@@ -12,7 +12,7 @@ describe('User visits list pad page', function() {
     browser.visit(url + '/pads/new', done);
   });
 
-  describe('list pad', function() {
+  describe('view pads', function() {
 
     before(function(done) {
       browser
@@ -23,12 +23,11 @@ describe('User visits list pad page', function() {
         .pressButton('List my pad', done);
     });
 
-    it('should be successful', function() {
-      browser.assert.success();
-    });
-
-    it('will redirect to /pads', function() {
-      browser.assert.url(url + '/pads');
+    it('have listing', function() {
+      browser.assert.text('body', 'Terry\'s House');
+      browser.assert.text('body', 'This is a');
+      browser.assert.text('body', 'London');
+      browser.assert.text('body', '200');
     });
 
   });

@@ -15,18 +15,11 @@ router.get('/new', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  var name        = req.body.name,
-      location    = req.body.location,
-      description = req.body.description,
-      price       = req.body.price;
-
-  Pad.findOrCreate({
-    where: {
-      name:         name,
-      location:     location,
-      description:  description,
-      price:        price
-    }});
+  var pad = Pad.create({name:   req.body.name,
+                  location:     req.body.location,
+                  description:  req.body.description,
+                  price:        req.body.price
+                });
 
   res.redirect('/pads');
 
