@@ -34,7 +34,6 @@ passport.use('local-login', new LocalStrategy({
         if(!bcrypt.compareSync(password, user.get('passwordDigest'))){
           return done(null, false);
         }
-        console.log('last return');
         return done(null, user);
       });
     }));
@@ -88,6 +87,5 @@ passport.use('local-login', new LocalStrategy({
 //     });
 //
 //  }));
-
 module.exports = passport;
 };

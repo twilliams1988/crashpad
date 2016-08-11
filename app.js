@@ -18,17 +18,13 @@ var routes   = require('./routes/index'),
     spaces   = require('./routes/spaces'),
     sessions = require('./routes/sessions');
 
-
 //init app
 var app = express();
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.locals.pagetitle = "CrashPad";
-
 
 //Middleware
 app.use(logger('dev'));
