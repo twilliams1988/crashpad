@@ -14,8 +14,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/new', function(req, res, next) {
   res.render('pads/new', {
-    title:      'List New Pad',
-    bodyClass:  'new-pad'
+    title:      'List New Pad'
   });
 });
 
@@ -38,23 +37,11 @@ router.get('/:id', function(req, res, next) {
       id: user_id
     }
   }).then(function(allPads) {
-    res.render('pads/index', {
-    title:      'Pad Listings',
+    res.render('pads/pad', {
+    title:      'Pad Booking',
     padList:    allPads
     });
   });
 });
-
-
-// get'/tags/:name' do
-//   tag = Tag.first(name: params[:name])
-//   @links = tag ? tag.links : []
-//   erb :'links/index'
-// // end
-// app.get('/article/:id', function(req , res){
-//   res.render('article' + req.params.id);
-// });
-
-
 
 module.exports = router;

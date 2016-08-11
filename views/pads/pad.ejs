@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head><% include ../partials/page/head.ejs %></head>
+  <body>
+    <% include ../partials/page/header.ejs %>
+
+    <div class="container">
+      <div class="col-md-6 col-md-offset-3">
+        <h1 class="text-center"><%= padList[0].name; %></h1><br>
+        <h4><b><%= padList[0].location; %></b></h4>
+        <h5>£<%= padList[0].price; %> Per night</h5>
+        <hr>
+        <p><%= padList[0].description; %></p>
+        <br>
+        <form action="">
+          <div class="form-group">
+            <label for="available-from">Pick A Night</label>
+            <input type="date" class="form-control" id="available-from" name="availableFrom">
+          </div>
+          <input class="btn btn-primary btn-lg pull-right" type="submit" value="Request to Book">
+        </form>
+      </div>
+    </div>
+    <% include ../partials/page/footer.ejs %>
+  </body>
+</html>
