@@ -9,6 +9,7 @@ var express       = require('express'),
     passport      = require('passport'),
     Sequelize     = require('sequelize'),
     User          = require('./models/user');
+    bcrypt        = require('bcrypt');
 
     require('./config/passport')(passport);
 
@@ -17,29 +18,33 @@ var routes   = require('./routes/index'),
     spaces   = require('./routes/spaces'),
     sessions = require('./routes/sessions');
 
+
 //init app
 var app = express();
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.locals.pagetitle = "CrashPad";
 
+
 //Middleware
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+//init passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Express session
 app.use(session({secret: 'secret', saveUninitialized: true, resave: true }));
-
-//init passport
-app.use(passport.initialize());
-app.use(passport.session());
 
 //Connect Flash
 app.use(flash());

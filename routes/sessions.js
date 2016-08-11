@@ -9,12 +9,11 @@ router.get('/new', function(req, res) {
   });
 });
 
-
-// router.post('/', passport.authenticate('local-login', {
-//     successRedirect : '/', // redirect to the secure profile section
-//     failureRedirect : '/sessions/new', // redirect back to the signup page if there is an error
-//     failureFlash : true // allow flash messages
-//     }));
+router.post('/', passport.authenticate('local-login', {
+    successRedirect : '/', // redirect to the secure profile section
+    failureRedirect : '/sessions/new' // redirect back to the signup page if there is an error
+    // failureFlash : true // allow flash messages
+  }));
 
 
 module.exports = router;

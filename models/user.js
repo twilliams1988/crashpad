@@ -33,3 +33,7 @@ module.exports.createUser = function(newUser, callback) {
     newUser.save(callback);
   });
 };
+
+module.exports.validPassword = function(password) {
+  return bcrypt.compareSync(password, User.get('passwordDigest'));
+};
