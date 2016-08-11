@@ -31,13 +31,29 @@ router.post('/', function(req, res, next) {
   });
 });
 
+router.get('/:id', function(req, res, next) {
+  var allPads = Pad.findAll({
+    where: {
+      id: 'e9515462-c539-4ecd-ab29-dab3c4c90a5c'
+    }
+  }).then(function(allPads) {
+    res.render('pads/index', {
+    title:      'Pad Listings',
+    padList:    allPads
+    });
+  });
+});
+
+
+// get'/tags/:name' do
+//   tag = Tag.first(name: params[:name])
+//   @links = tag ? tag.links : []
+//   erb :'links/index'
+// // end
+// app.get('/article/:id', function(req , res){
+//   res.render('article' + req.params.id);
+// });
+
+
 
 module.exports = router;
-
-
-// User.create({ username: 'barfooz', isAdmin: true }, { fields: [ 'username' ] }).then(function(user) {
-//   // let's assume the default of isAdmin is false:
-//   console.log(user.get({
-//     plain: true
-//   })) // => { username: 'barfooz', isAdmin: false }
-// })

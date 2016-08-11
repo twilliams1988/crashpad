@@ -5,7 +5,7 @@ var connection = require('./sequelize.js');
     id: {
       primaryKey: true,
       type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4
+      defaultValue: Sequelize.UUIDV1
     },
     name: {
       type: Sequelize.STRING
