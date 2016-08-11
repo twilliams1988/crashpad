@@ -11,12 +11,13 @@ var express       = require('express'),
     User          = require('./models/user');
     bcrypt        = require('bcrypt');
 
+    require('./config/passport')(passport);
+
 var routes    = require('./routes/index'),
     users     = require('./routes/users'),
     pads      = require('./routes/pads');
     requests  = require('./routes/requests');
     sessions = require('./routes/sessions');
-    require('./config/passport')(passport);
 
 //init app
 var app = express();
