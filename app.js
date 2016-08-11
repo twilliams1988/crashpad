@@ -5,7 +5,7 @@ var express       = require('express'),
     bodyParser    = require('body-parser'),
     session       = require('express-session'),
     flash         = require('connect-flash'),
-    validator     = require('express-validator'),
+    expressValidator   = require('express-validator'),
     passport      = require('passport'),
     Sequelize     = require('sequelize'),
     User          = require('./models/user');
@@ -43,6 +43,32 @@ app.use(passport.session());
 
 //Connect Flash
 app.use(flash());
+
+//express validator
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.'),
+            root    = namespace.shift(),
+            formParam = root;
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
+
+// Global Vars
+app.use(function (req, res, next) {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.errors = req.flash('errors');
+  res.locals.user = req.user || null;
+  next();
+});
 
 //routes
 app.use('/', routes);
