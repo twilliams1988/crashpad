@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Pad = require('../models/pad');
-
+var Booking = require('../models/booking');
 
 router.get('/', function(req, res, next) {
   var allPads = Pad.findAll().then(function(allPads) {

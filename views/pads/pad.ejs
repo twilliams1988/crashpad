@@ -12,10 +12,11 @@
         <hr>
         <p><%= padList[0].description; %></p>
         <br>
-        <form action="">
+        <form method="post" action="/requests">
           <div class="form-group">
             <label for="available-from">Pick A Night</label>
-            <input type="date" class="form-control" id="available-from" name="availableFrom">
+            <input type="hidden" name="padId" value="<%= padList[0].id; %>">
+            <input type="date" class="form-control" id="available-from" name="bookingDate">
           </div>
           <input class="btn btn-primary btn-lg pull-right" type="submit" value="Request to Book">
         </form>

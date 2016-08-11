@@ -10,9 +10,10 @@ var Sequelize     = require('sequelize'),
     validator     = require('express-validator'),
     app           = express();
 
-var routes  = require('./routes/index'),
-    users   = require('./routes/users'),
-    pads    = require('./routes/pads');
+var routes    = require('./routes/index'),
+    users     = require('./routes/users'),
+    pads      = require('./routes/pads');
+    requests  = require('./routes/requests');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,6 +32,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/pads', pads);
+app.use('/requests', requests);
+
 
 //flash config
 // app.use(express.cookieParser('keyboard cat'));
