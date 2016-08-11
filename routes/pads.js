@@ -32,9 +32,10 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
+  var user_id = req.params.id;
   var allPads = Pad.findAll({
     where: {
-      id: 'e9515462-c539-4ecd-ab29-dab3c4c90a5c'
+      id: user_id
     }
   }).then(function(allPads) {
     res.render('pads/index', {

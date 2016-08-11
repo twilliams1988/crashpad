@@ -8,7 +8,7 @@
       <div class="col-md-6 col-md-offset-3">
         <div class="list-group">
           <% for (var i=0; i < padList.length;i++) { %>
-          <a href="/pads/:id" %>" class="list-group-item">
+          <a href="/pads/<%= padList[i].id %>" class="list-group-item">
             <h4 class="list-group-item-heading"><%= padList[i].name; %> <span class="label label-primary">£<%= padList[i].price; %></span></h4>
             <h5 class="list-group-item-heading"><i class="fa fa-map-marker" aria-hidden="true"></i> <%= padList[i].location; %></h5>
             <h6 class="list-group-item-heading"><i class="fa fa-calendar" aria-hidden="true"></i> <b><%= padList[i].availableFrom.toDateString(); %></b> to <b><%= padList[i].availableTo.toDateString(); %></b> </h6>

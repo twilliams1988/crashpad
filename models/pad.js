@@ -4,8 +4,8 @@ var connection = require('./sequelize.js');
   var Pad = connection.define('pad', {
     id: {
       primaryKey: true,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV1
+      type: Sequelize.INTEGER,
+      autoIncrement: true
     },
     name: {
       type: Sequelize.STRING
