@@ -1,5 +1,7 @@
 var Sequelize = require('sequelize');
-var connection = require('./sequelize.js');
+var connection = require('../config/sequelize.js');
+// var bcrypt = require('bcrypt');
+// var salt = bcrypt.genSaltSync(10);
 
 var User = connection.define('user', {
   id: {
@@ -21,5 +23,12 @@ var User = connection.define('user', {
     validate: {notEmpty: true}
   }});
 
-User.sync({force: false});
+User.sync();
 module.exports = User;
+
+// module.exports.createUser = function(newUser, callback) {
+//   bcrypt.hash(newUser, 10, function(err, hash) {
+//     newUser.password = hash;
+//     newUser.save(callback);
+//
+//   });

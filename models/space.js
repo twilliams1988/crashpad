@@ -1,5 +1,5 @@
 var Sequelize = require('sequelize');
-var connection = require('./sequelize.js');
+var connection = require('../config/sequelize.js');
 
   var Space = connection.define('space', {
     id: {
