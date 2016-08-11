@@ -37,7 +37,7 @@ router.post('/', function(req, res) {
       firstName: firstName,
       lastName: lastName,
       email: email,
-      password: password
+      passwordDigest: password
     });
 
     User.createUser(newUser, function(err, user){

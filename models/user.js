@@ -24,11 +24,12 @@ var User = connection.define('user', {
   }});
 
 User.sync();
+
 module.exports = User;
 
 module.exports.createUser = function(newUser, callback) {
-  bcrypt.hash(newUser.password, salt, function(err, hash) {
-    newUser.password = hash;
+  bcrypt.hash(newUser.passwordDigest, salt, function(err, hash) {
+    newUser.passwordDigest= hash;
     newUser.save(callback);
   });
 };
