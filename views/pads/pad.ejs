@@ -9,6 +9,7 @@
         <h1 class="text-center"><%= padList[0].name; %></h1><br>
         <h4><b><%= padList[0].location; %></b></h4>
         <h5>£<%= padList[0].price; %> Per night</h5>
+        <h6 class="list-group-item-heading"><b><%= padList[0].availableFrom.toDateString(); %></b> to <b><%= padList[0].availableTo.toDateString(); %></b></h6>
         <hr>
         <p><%= padList[0].description; %></p>
         <br>
@@ -16,12 +17,30 @@
           <div class="form-group">
             <label for="available-from">Pick A Night</label>
             <input type="hidden" name="padId" value="<%= padList[0].id; %>">
-            <input type="date" class="form-control" id="available-from" name="bookingDate">
+            <input type="text" class="form-control" id="available-from" name="bookingDate">
           </div>
           <input class="btn btn-primary btn-lg pull-right" type="submit" value="Request to Book">
         </form>
       </div>
     </div>
     <% include ../partials/page/footer.ejs %>
+    <script>
+      var yearFrom     = <%= padList[0].availableFrom.getFullYear(); %>
+      var monthFrom    = <%= padList[0].availableFrom.getMonth(); %>
+      var dayFrom      = <%= padList[0].availableFrom.getDate(); %>
+
+      var yearTo     = <%= padList[0].availableTo.getFullYear(); %>
+      var monthTo    = <%= padList[0].availableTo.getMonth(); %>
+      var dayTo      = <%= padList[0].availableTo.getDate(); %>
+
+      $(document).ready(function() {
+        $(function() {
+          $("#available-from").datepicker({
+            minDate: new Date(yearFrom, monthFrom, dayFrom),
+            maxDate: new Date(yearTo, monthTo, dayTo)
+          });
+        });
+      });
+    </script>
   </body>
 </html>
