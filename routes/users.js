@@ -1,44 +1,57 @@
 var express = require('express');
 var router = express.Router();
+// var passport = require('../config/passport');
 var User = require('../models/user');
-var bcrypt = require('bcrypt');
-var salt = bcrypt.genSaltSync(10);
 
 
 /* GET users listing. */
 router.get('/new', function(req, res) {
   res.render('users/new', {
-    title:      'Sign Up'
+    title: 'Sign Up'
   });
 
 });
 
-
 router.post('/', function(req, res) {
-  var user = User.build({firstName: req.body.firstName,
-                  lastName: req.body.lastName,
-                  email: req.body.email,
-                  password: req.body.password,
-                  passwordConfirmation: req.body.passwordConfirmation
-                });
-  // if(user.password === user.passwordConfirmation) {
-  //     user.save();
-  //     res.redirect('/');
-  // } else {
-  //   res.render('/users/new');
-  // }
-  //
-  });
+  var firstName = req.body.firstName,
+      lastName = req.body.lastName,
+      email = req.body.email,
+      password = req.body.password,
+      passwordConfirmation = req.body.passwordConfirmation;
 
-      // checkPassword();
-      // function checkPassword(){
-      //   if(password !== passwordConfirmation) {
-      //     res.redirect('/users/new');
-      //   } else {
-      //     var password_digest = bcrypt.hashSync(password, salt);
-      //
+  //Validation
+  req.checkBody('firstName', "First name is required").notEmpty();
+  req.checkBody('lastName', "Last name is required").notEmpty();
+  req.checkBody('firstName', "Name is required").notEmpty();
+  req.checkBody('email', "Email is required").notEmpty();
+  req.checkBody('email', "Please enter a valid email").isEmail();
+  req.checkBody('password', "Password is required").notEmpty();
+  req.checkBody('passwordConfirmation', "Passwords do not match").equals(password);
 
-      //   }
-      // }
+  var errors = req.validationErrors();
+
+  if(errors) {
+    res.render('users/new', {title: 'Sign Up', errors: errors});
+  } else {
+    var newUser = User.build({
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      passwordDigest: password
+    });
+
+    User.createUser(newUser, function(err, user){
+      if(err) throw err;
+    });
+    req.flash('success_msg', 'You are registered and can now log in');
+    res.redirect('/sessions/new');
+  }
+});
+
+//passport.authenticate('local-signup', {
+//         successRedirect : '/sessions/new', // redirect to the secure profile section
+//         failureRedirect : '/users/new', // redirect back to the signup page if there is an error
+//         failureFlash : true // allow flash messages
+//     }));
 
 module.exports = router;
