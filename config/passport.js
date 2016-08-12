@@ -34,6 +34,7 @@ passport.use('local-login', new LocalStrategy({
         if(!bcrypt.compareSync(password, user.get('passwordDigest'))){
           return done(null, false);
         }
+        console.log(req.session);
         return done(null, user);
       });
     }));

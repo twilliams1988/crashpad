@@ -1,9 +1,7 @@
 var express = require('express');
 var router = express.Router();
-// var passport = require('../config/passport');
 var models  = require('../models');
 var bcrypt = require('bcrypt');
-var salt = bcrypt.genSaltSync(10);
 
 /* GET users listing. */
 router.get('/new', function(req, res) {
@@ -14,12 +12,6 @@ router.get('/new', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-  var firstName = req.body.firstName,
-      lastName = req.body.lastName,
-      email = req.body.email,
-      password = req.body.password,
-      passwordConfirmation = req.body.passwordConfirmation;
-
   //Validation
   req.checkBody('firstName', "First name is required").notEmpty();
   req.checkBody('lastName', "Last name is required").notEmpty();
@@ -27,43 +19,40 @@ router.post('/', function(req, res) {
   req.checkBody('email', "Email is required").notEmpty();
   req.checkBody('email', "Please enter a valid email").isEmail();
   req.checkBody('password', "Password is required").notEmpty();
-  req.checkBody('passwordConfirmation', "Passwords do not match").equals(password);
+  req.checkBody('passwordConfirmation', "Passwords do not match").equals(req.body.password);
 
   var errors = req.validationErrors();
 
-  if(errors) {
-    res.render('users/new', {title: 'Sign Up', errors: errors});
-  } else {
-    var newUser = models.user.build({
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      passwordDigest: password
-    });
+  models.user.findOne({where: { 'email' : req.body.email}}).then(function(user, err) {
+      if(user) {
+      req.flash('error_msg', 'Email is already registered');
+      res.render('users/new', {title: 'Sign Up', errors: errors});
+    } else if(errors) {
+        res.render('users/new', {title: 'Sign Up', errors: errors});
+      } else {
+        var newUser = models.user.build({
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          email: req.body.email,
+          passwordDigest: req.body.password
+        });
 
-    createUser(newUser, function(err, user){
-      if(err) throw err;
+        createUser(newUser, function(err, user){
+          if(err) throw err;
+        });
+        req.flash('success_msg', 'You are registered and can now log in');
+        res.redirect('/sessions/new');
+      }
     });
-    req.flash('success_msg', 'You are registered and can now log in');
-    res.redirect('/sessions/new');
-  }
 });
 
-createUser = function(newUser, callback) {
-  bcrypt.hash(newUser.passwordDigest, salt, function(err, hash) {
-    newUser.passwordDigest= hash;
-    newUser.save(callback);
+var createUser = function(newUser, callback) {
+  bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.hash(newUser.passwordDigest, salt, function(err, hash) {
+      newUser.passwordDigest = hash;
+      newUser.save(callback);
+    });
   });
 };
-
-validPassword = function(password) {
-  return bcrypt.compareSync(password, User.get('passwordDigest'));
-};
-
-//passport.authenticate('local-signup', {
-//         successRedirect : '/sessions/new', // redirect to the secure profile section
-//         failureRedirect : '/users/new', // redirect back to the signup page if there is an error
-//         failureFlash : true // allow flash messages
-//     }));
 
 module.exports = router;
