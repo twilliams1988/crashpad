@@ -9,6 +9,9 @@ var express       = require('express'),
     passport      = require('passport'),
     Sequelize     = require('sequelize'),
     User          = require('./models/user');
+    Pad          = require('./models/pad');
+    Booking          = require('./models/booking');
+
     bcrypt        = require('bcrypt');
 
     require('./config/passport')(passport);

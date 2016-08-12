@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var Pad = require('../models/pad');
-var Booking = require('../models/booking');
+var Pad = require('../models/user');
+// var Booking = require('../models/booking');
+
 
 router.get('/', function(req, res, next) {
   var allPads = Pad.findAll().then(function(allPads) {
@@ -24,7 +25,8 @@ router.post('/', function(req, res, next) {
                   description:    req.body.description,
                   price:          req.body.price,
                   availableFrom:  req.body.availableFrom,
-                  availableTo:    req.body.availableTo
+                  availableTo:    req.body.availableTo,
+                  // userId:         req.session.passport.user
   }).then(function(user) {
   res.redirect('/pads');
   });

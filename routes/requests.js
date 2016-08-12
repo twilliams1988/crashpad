@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var Pad = require('../models/pad');
-var Booking = require('../models/booking');
+// var Pad = require('../models/pad');
+var Booking = require('../models/user');
 
 
 router.get('/', function(req, res, next) {

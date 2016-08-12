@@ -9,7 +9,9 @@ router.get('/new', function(req, res) {
   res.render('users/new', {
     title: 'Sign Up'
   });
-
+console.log(req.session.passport.user);
+console.log(req.session.passport);
+console.log(req.session);
 });
 
 router.post('/', function(req, res) {
