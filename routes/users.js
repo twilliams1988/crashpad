@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 // var passport = require('../config/passport');
-var User = require('../models/user');
-
+var models  = require('../models');
+var bcrypt = require('bcrypt');
+var salt = bcrypt.genSaltSync(10);
 
 /* GET users listing. */
 router.get('/new', function(req, res) {
@@ -33,20 +34,31 @@ router.post('/', function(req, res) {
   if(errors) {
     res.render('users/new', {title: 'Sign Up', errors: errors});
   } else {
-    var newUser = User.build({
+    var newUser = models.user.build({
       firstName: firstName,
       lastName: lastName,
       email: email,
       passwordDigest: password
     });
 
-    User.createUser(newUser, function(err, user){
+    createUser(newUser, function(err, user){
       if(err) throw err;
     });
     req.flash('success_msg', 'You are registered and can now log in');
     res.redirect('/sessions/new');
   }
 });
+
+createUser = function(newUser, callback) {
+  bcrypt.hash(newUser.passwordDigest, salt, function(err, hash) {
+    newUser.passwordDigest= hash;
+    newUser.save(callback);
+  });
+};
+
+validPassword = function(password) {
+  return bcrypt.compareSync(password, User.get('passwordDigest'));
+};
 
 //passport.authenticate('local-signup', {
 //         successRedirect : '/sessions/new', // redirect to the secure profile section
